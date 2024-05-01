@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting and Searching</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>My Portfolio</h1>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="what_is_oop.html">What is OOP?</a></li>
+        <li><a href="inheritance.html">Inheritance</a></li>
+        <li><a href="arrays.html">Arrays</a></li>
+        <li><a href="arraylist.html">ArrayList</a></li>
+        <li><a href="arraystwo.html">2D Arrays</a></li>
+        <li><a href="searchandsort.html">Search and Sort</a></li>
+        <li><a href="recursion.html">Recursion</a></li>
+        <li><a href="polymorphism.html">Polymorphism</a></li>
+        <li><a href="bibliography.html">Bibliography</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="sorting-searching">
+    <h1>Sorting and Searching</h1>
+    <p>Now that we know all about Arrays and ArrayLists, what if we wanted to sort them in order from greatest to least to leat? What if we wanted to search term for a particular element, like a student’s name?</p>
+    <p>There exist two crucial operations in computer science – sorting and searching. Sorting involves arranging data in a particular order (ascending or descending), while searching is the process of finding a particular item in an array.</p>
+    <p>In Java, arrays are a fundamental data structure, and the ability to efficiently sort and search these arrays is critical. Sorting enables us to better understand and visualize our data, making it easier to analyze. It also allows for faster and more efficient searching, as sorted arrays enable us to implement advanced search algorithms, like binary search, which significantly reduces the time complexity compared to a linear search.</p>
+    <figure class="table">
+        <table>
+            <tbody>
+                <tr>
+                    <td>💡 Time Complexity: A numerical representation we can use to estimate (on average, or in a best/worse case) how many operations a program needs to make from start to finish, or how quick it is. Time complexity is represented in Big-O notation. For example, O(N) means that the program makes N operations, such as looping through an array with size N and printing each element out.</td>
+                </tr>
+            </tbody>
+        </table>
+    </figure>
+    <h1>Searching</h1>
+    <h1>Search</h1>
+    <p>There are two main sorts to use: sequential sort and binary search.</p>
+    <p>Sequential sort involves looping through all elements of an array and seeing if one element matches the one that you want. Thus, the time complexity is O(N), where N is the length of the array. On the other hand, binary search requires the array to be sorted (in either ascending order or descending order), and continuously finds the middle element os it knows whether to search the range of elements higher or lower than the middle element.</p>
+    <p>The implementation for sequential sort is quite simple. This problem had an array called myCList which stored objects for candidates. Sequential sort allowed us to easily access all elements (which we needed) of the array, and find one element in particular that had a num vote == 100.</p>
+    <pre><code class="language-java">public void computeVotePercents() {
+          int totalVotes = 0;
+          
+          for (int i = 0; i &lt; myCList.length; i++) { // loops through array elements
+             if(myCList[i].getNumVotes() == 100) {
+                 totalVotes = i;
+             }
+          }   
+          
+       }
+    </code></pre>
+    <p>As you can see, what we basically do is loop through the array elements. We start at index 0, and end at length - 1. This allows us to access all elements of the array. We can also use a while loop for the same sequential search.</p>
+    <p>For binary search, the goal is the same, which is to loop through elements of an array. However, there is a key difference: we don’t loop through all elements in the array and the array has to be sorted. Whether or not it’s sorted in ascending or descending order doesn’t really matter, and we can configure the implementation for both.</p>
+    <p>Binary search is a two pointer approach which means that the element has to be between the left and the right pointer.</p>
+    <p>What we do in binary search is continuously find the middle element. Depending on if the element we are sorting for is greater or less than the middle element,w e search the top or bottom part of the array continuously until we find the item or until the right pointer is less than the left pointer.</p>
+    <figure class="image"><img style="aspect-ratio:720/401;" src="https://file.notion.so/f/f/6d51f1ff-7638-4369-839e-0f1f212e823f/ff87f494-9882-4c01-968d-938423073673/Untitled.png?id=c5cf7236-137d-4879-b21b-59a9f369e62a&amp;table=block&amp;spaceId=6d51f1ff-7638-4369-839e-0f1f212e823f&amp;expirationTimestamp=1714608000000&amp;signature=LKvFhgmbBgAf4ZwgfhypBvfjI9npNlT5ckFJYt5e5gA&amp;downloadName=Untitled.png" width="720" height="401">
+        <figcaption>How binary search works. Source: <a target="_blank" rel="noopener noreferrer" href="https://www.geeksforgeeks.org/binary-search/">https://www.geeksforgeeks.org/binary-search/</a></figcaption>
+    </figure>
+    <p>To better understand a code implementation of binary search, here is an implementation (cited in bibliography).</p>
+    <pre><code class="language-java">int binarySearch(int arr[], int x)
+        {
+            int l = 0, r = arr.length - 1;
+            while (l &lt;= r) {
+                int m = l + (r - l) / 2;
+
+                // Check if x is present at mid
+                if (arr[m] == x)
+                    return m;
+
+                // If x greater, ignore left half
+                if (arr[m] &lt; x)
+                    l = m + 1;
+
+                // If x is smaller, ignore right half
+                else
+                    r = m - 1;
+            }
+
+            // If we reach here, then element was
+            // not present
+            return -1;
+        }
+    </code></pre>
+    <p>As you can see, we narrow down the range of the left and right pointers until we find the element OR if the left pointer is larger than the right, which means that we have reached the smallest range possible for the element to be in and we could not find it. There is also a recursion version of binary search, which recursively calls itself until it finds the element. Binary search runs in O(logN) time complexity as we continuously split the array up in halves. Be sure to implement the methods exactly as shown!! Or there will be errors! For example, a common mistake is swapping the recursive calls in the if structure. Be sure to understand how binary search works. This will faciliate your implementation of the code.</p>
+    <h1>Sorting</h1>
+    <p>We have already seen and understood the two major types of searching. For searching, we did not change any elements. However, for sorting, we will sort the array in order, either in ascending or descending order. There are different types of sorting algorithms that we will go over.</p>
+    <p>Although the steps for each algorithm (which you can think of as a series of steps to follow to sort an array/ArrayList) differ, the end result should be the same, which is a sorted array. Every algorithm has its own time complexity as defined earlier.</p>
+    <p></p>
+    <h1>Quick Sort</h1>
+    <p>Quicksort, as the name implies, is one of the quickest sorting algorithms out there. I did a presentation on QuickSort and wrote the explanation, example, and part of the code. Here is the explanation and steps that QuickSort does to sort an array/ArrayList.</p>
+    <p>The presentation we delivered was delivered to the class. It is meant to be as descriptive and accessible as possible.</p>
+
+    <p>Step by step walkthrough slides:</p>
+    <figure class="image"><img style="aspect-ratio:875/495;" src="https://file.notion.so/f/f/6d51f1ff-7638-4369-839e-0f1f212e823f/36d0c479-91fe-4988-bb74-e948aa4f34a5/Untitled.png?id=b0ab0547-5c06-41e3-adf3-63fca468ccb2&amp;table=block&amp;spaceId=6d51f1ff-7638-4369-839e-0f1f212e823f&amp;expirationTimestamp=1714608000000&amp;signature=luBiar2rI6OJa9DembunrvNzBZPxB1z2atsn9qHJ1Cg&amp;downloadName=Untitled.png" width="875" height="495"></figure>
+    <figure class="image"><img style="aspect-ratio:874/489;" src="https://file.notion.so/f/f/6d51f1ff-7638-4369-839e-0f1f212e823f/64375e7c-51a4-4b4f-b7e7-fe1b8186f87e/Untitled.png?id=283def77-f5e5-44c0-8c17-70dc9657a06e&amp;table=block&amp;spaceId=6d51f1ff-7638-4369-839e-0f1f212e823f&amp;expirationTimestamp=1714608000000&amp;signature=LnSSVBeUpuw068pyBgRGKCSkESmRpelwKNkSsuffiWI&amp;downloadName=Untitled.png" width="874" height="489"></figure>
+    <p>&nbsp;</p>
+    <p><a target="_blank" rel="noopener noreferrer" href="https://file.notion.so/f/f/6d51f1ff-7638-4369-839e-0f1f212e823f/4135e080-f1a1-46ee-9930-1e81aeff66ad/video1479024238.mp4?id=c6e4e6b3-b476-4867-b4f7-ad83adc9d936&amp;table=block&amp;spaceId=6d51f1ff-7638-4369-839e-0f1f212e823f&amp;expirationTimestamp=1714608000000&amp;signature=BW83s3LIjc3ZGCsyuh_knhU-VJJvQ-9tpYDAy9JCaDA&amp;downloadName=video1479024238.mp4">Video &amp; walkthrough slides made by Nathan Wang.</a> Click link for the video.</p>
+    <h1>Search and Sort Applications</h1>
+    <ol>
+        <li>Competitive programming problems<ol>
+                <li>There are many algorithms and observations you can make when you sort an array. Even more when you sort two. Lots of algorithms can be found from sorted arrays, like the DMOJ IOI Practice task 3.</li>
+            </ol>
+        </li>
+        <li>When you have a list and want to find an element<ol>
+                <li>Many aspects of real life!</li>
+                <li>Examples: Changing a mark in a student object array</li>
+            </ol>
+        </li>
+    </ol>
+  </section>
+
+</body>
+</html>

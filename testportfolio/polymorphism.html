@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polymorphism</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>My Portfolio</h1>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="what_is_oop.html">What is OOP?</a></li>
+        <li><a href="inheritance.html">Inheritance</a></li>
+        <li><a href="arrays.html">Arrays</a></li>
+        <li><a href="arraylist.html">ArrayList</a></li>
+        <li><a href="arraystwo.html">2D Arrays</a></li>
+        <li><a href="searchandsort.html">Search and Sort</a></li>
+        <li><a href="recursion.html">Recursion</a></li>
+        <li><a href="polymorphism.html">Polymorphism</a></li>
+        <li><a href="bibliography.html">Bibliography</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="polymorphism">
+    <h1>What is Polymorphism?</h1>
+    <p>Polymorphism directly translates to “appearing in many different forms.” That’s what it is in Java! An object can be declared as one type and be initialized as another? For example, you may have see the following initialization of ArrayList objects (which are introduced in unit 4).</p>
+    <pre><code class="language-java">List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;(); //Example 1
+</code></pre>
+    <p>In simple words, polymorphism allows you to do things in different ways. In more technical terms, polymorphism allows you to have several implementations of one thing. Consider, for example, a person in real life. The person is a person, but could also be a teacher, a cook, or a parent. The person has different roles, and we could recreate this in OOP Java through using polymorphism.</p>
+    <h1>Types of Polymorphism</h1>
+    <p>There are two types of polymorphism in Java: compile time polymorphism and runtime polymorphism.</p>
+    <h2>Compile Time Polymorphism</h2>
+    <p>Compile time polymorphism can be done through overloading methods.</p>
+    <p>The following conditions need to be met for overloading methods: multiple methods have the exact same name (capitalization matters!) but different parameters. Based on the parameters passed, the <strong>compiler</strong> (hence compile time polymorphism) will decide which method to call.</p>
+    <p>Here is a demonstration of method overloading.</p>
+    <pre><code class="language-java">public void name() {
+	// method 1
+}
+public void name(String n) {
+	// method 2
+}
+
+// THE FOLLOWING CODE IS LOCATED IN ANOTHER CLASS
+
+String test = "have a great day!";
+name(); // calls method 1
+name(test); // calls method 2
+name(2); // error, no method with the parameters of int
+</code></pre>
+    <p>It is important to note that method overloading allows the same basic method to be done but in different ways through using different parameters.</p>
+    <h2>Run Time Polymorphism</h2>
+    <p>Runtime polymorphism is a bit different than compile time polymorphism. Instead of using method overloading, we use method overriding. It is called runtime polymorphism because it is determined which method to run, at runtime instead of at the compile time. Method overriding is when there are two methods of the same name, one in the superclass and one in the base class.</p>
+    <pre><code class="language-java">// Superclass
+public class Pet {
+    public void sound() {
+        System.out.println("The pet makes a sound!");
+    }
+}
+
+// Subclass
+public class Dog extends Pet {
+    // Method overriding
+    public void sound() { // same method name
+        System.out.println("The dog barks! Woof woof!");
+    }
+}
+
+// Test class
+public class Test {
+    public static void main(String[] args) {
+        Pet myPet = new Pet();
+        Pet myDog = new Dog();
+
+        myPet.sound();  // Outputs: The pet makes a sound!
+        myDog.sound();  // Outputs: The dog barks! Woof woof!
+    }
+}
+</code></pre>
+    <p>Why does the program print the given output?</p>
+    <p>At <strong>runtime</strong>, Java determines the actual type of the object that the method is called on, not the reference type. So even though the reference type of <code>myDog</code> is <code>Pet</code>, the actual object type is <code>Dog</code>, so therefore the <code>Dog</code> class's <code>sound</code> method is called.</p>
+    <figure class="table">
+        <table>
+            <tbody>
+                <tr>
+                    <td>💡 If a superclass method is called on an object that is an instance of the subclass, then the overridden method in the subclass is executed. However, if the method is not overridden in the subclass, then the superclass method is executed.</td>
+                </tr>
+            </tbody>
+        </table>
+    </figure>
+    <h1>Demonstration of Polymorphism</h1>
+    <p>Here is a project to demonstrate polymorphism. Here, we had to create a fantasy game where different fantasy creatures entered various fantasy places. Thus, polymorphism allowed us to very easily create one superclass (Mythical Creature) and extend creature classes and call certain methods so that 1) we could be more efficient using inheritance and 2) we can use method overriding.</p>
+    <pre><code class="language-java">// 2024-04-24
+// Allen Yang and Nathan Wang
+// Ms. Krasteva
+// MythicalCreature Class
+
+public abstract class MythicalCreature {
+   String name;
+   int health;
+   int gold;
+   final static int maxGold = 20;
+   
+   public MythicalCreature(String name) {
+      this.name = name;
+      gold = 0;
+      health = 100;
+      
+   }
+   
+   void exposeToRadiation() {
+      health = (int)(health * 0.95);
+      System.out.println(name + " was exposed to radiation! Health = " + health + "%");
+   }
+   
+   int takeGold(int available) {
+      
+      int leftover = 0;
+      System.out.print("Gold: " + gold + " Available: " + available  + " Max: " + maxGold + "\\n");
+      if (gold == maxGold){
+         leftover = available;
+         System.out.println(name + " is already at max gold! No gold is taken. Gold left = " + leftover + " bars");
+      } else {		
+         if (available + gold &lt;= maxGold)
+         {
+            gold += available;
+            leftover = 0;
+            System.out.println(name + " takes " + available + " gold. Gold left = " + leftover + " bars");
+         
+         }
+         else
+         {
+            leftover = available - (maxGold - gold);
+            System.out.println(name + " takes " + (maxGold - gold) + " gold. Gold left = " + leftover + " bars");
+            gold = maxGold; 
+         }
+      }
+   	
+      return leftover;
+   }
+   
+   String getName(){
+      return name;
+   }
+}
+</code></pre>
+    <pre><code class="language-java">// 2024-04-24
+// Allen Yang and Nathan Wang
+// Ms. Krasteva
+// Dragon Class
+
+class Dragon extends MythicalCreature {
+   String name;
+   int health;
+   int gold;
+   final static int maxGold = 8;
+	
+   Dragon(String name)
+   {
+      super(name);
+   }
+	
+   void burnRoom (MythicalRoom b) {
+      System.out.println("Dragon destroys building: " + b.getName());
+   }
+   
+   void eatFire() {
+      health = 100;
+   }
+}
+</code></pre>
+    <p>The first file (MythicalCreature) shown is extended by the Dragon (second file).</p>
+    <p>Why did we use polymorphism here? We used polymorphism here because we wanted to have a parent class (MythicalCreature) from which we could create subclasses (like Dragon). This allows us to easily create common attributes and methods in the superclass and only specify unique attributes or methods in the subclasses. Additionally, we could override methods from the superclass in the subclasses to provide different implementations (following the definition of polymorphism).</p>
+    <p>A technical detail here is the super() keyword calls the associated constructor/method in the superclass. So, super.methodName() will call the overridden method in the superclass while super() would call the constructor in the superclass. Of course, you could add parameters inside the brackets for the super keyword.</p>
+    <h1>Abstract Classes &amp; Interfaces</h1>
+    <p>Abstract classes are:</p>
+    <ul>
+        <li>Similar to normal classes but they cannot be instantiated. This means you cannot create an object from an abstract class. Instead, abstract classes are meant to be extended by other classes. You must EXTEND an abstract class.</li>
+        <li>Sort of like a template for classes. You can implement abstract class methods.</li>
+        <li>Have the “abstract” keyword in class definition. Implemented through “extends” keyword</li>
+    </ul>
+    <p>Interfaces are:</p>
+    <ul>
+        <li>It forces all classes that implement it to have certain methods.</li>
+        <li>They are similar to abstract classes, but they cannot contain any implementation code.</li>
+        <li>They can only declare methods and constants. You must IMPLEMENT an abstract class.</li>
+        <li>Have the “interface” keyword in class definition and implemented through “implements” keyword</li>
+    </ul>
+    <figure class="image"><img style="aspect-ratio:499/342;" src="https://www.softwaretestinghelp.com/wp-content/qa/uploads/2018/09/EmployeeDetails.png" width="499" height="342">
+        <figcaption>Source: https://www.softwaretestinghelp.com/java/java-interfaces-abstract-classes/. Illustration for OOP3.</figcaption>
+    </figure>
+    <h1>Common Mistakes</h1>
+    <ol>
+        <li>Confuse method overloading with method overriding.<ol>
+                <li>Overloading happens in the same class with methods of the same name but different parameters, while overriding involves a method in a subclass having the same name and parameters as in its superclass.</li>
+            </ol>
+        </li>
+        <li>Another common mistake is misunderstanding reference (in terms of polymorphism). In Java, the reference type can be a superclass of the object type. Not the other way around!</li>
+        <li>Forgetting the semicolon at the end of abstract classes and interfaces if there is no implementation.</li>
+    </ol>
+    <h1>Applications &amp; Pros/Cons</h1>
+    <p>Polymorphism is used extensively to model an object that can have different implementations, like the Person example specified above. Overall, polymorphism is a fundamental concept in OOP that allows for flexibility and re-usability of code. It enables objects of different types to be treated as objects of a parent type, leading to more efficiency in code, being able to reuse certain methods, or call other methods using overloading or overriding. However, it may sometimes be confusing to debug, especially if you are unsure which methods are being called.</p>
+  </section>
+</body>
+</html>

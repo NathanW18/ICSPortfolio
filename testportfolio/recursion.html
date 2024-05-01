@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recursion</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>My Portfolio</h1>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="what_is_oop.html">What is OOP?</a></li>
+        <li><a href="inheritance.html">Inheritance</a></li>
+        <li><a href="arrays.html">Arrays</a></li>
+        <li><a href="arraylist.html">ArrayList</a></li>
+        <li><a href="arraystwo.html">2D Arrays</a></li>
+        <li><a href="searchandsort.html">Search and Sort</a></li>
+        <li><a href="recursion.html">Recursion</a></li>
+        <li><a href="polymorphism.html">Polymorphism</a></li>
+        <li><a href="bibliography.html">Bibliography</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="recursion">
+    <h1>Recursion</h1>
+    <p><aside> 💡 Recursion is when a method calls itself. Ultimately, there has to be a base case where the method stops calling itself. All recursive calls must make progress towards the base case. Otherwise, a StackOverflow error will be thrown at you.</aside></p>
+    <p>The concept of recursion is quite clear, but the applications are not. Why do we have to use recursion? When even would we even have to use recursion? Can we use something like a for-loop instead of recursion? What results do recursion even produce? WHAT???</p>
+    <p>Recursion can be better illustrated through an example. Let’s say we wanted to add up all the numbers from 1 all the way to 7, inclusive. We could use a for loop to iterate through all the numbers and add them up while we’re there.</p>
+    <pre><code class="language-java">   public int sum (int number) {
+      int sumNumber = 0;
+      for (int i = 1; i &lt;= number; i++) { // iteratively adds i to sumNumber as the loop progresses
+         sumNumber += i;
+      }
+      return sumNumber;
+   }
+</code></pre>
+    <p>But, there’s a more sneaky, tricky, and complicated of doing this — recursion! Obviously, it may seem pointless to use recursion to do such trivial tasks we could accomplish using for loops, but in reality, recursion can help us out a LOT in programs where we can’t just loop through something, like a graph or a tree.</p>
+    <p>Let’s see the same program with the exact same purpose, but implemented with recursion.</p>
+    <pre><code class="language-java">public int sumR (int number) {
+      if(number == 0) { // base case when there are no more numbers to add
+         return number;
+      }
+      return number + sumR(number-1); // adds number-1 recursively
+   }
+</code></pre>
+    <p>That’s a bit confusing. What even are we returning? And why’s there recursion in the return line?</p>
+    <p>Firstly, let’s consider why we use recursion here.</p>
+    <p><aside> ❓ We’re trying to add up the numbers from 1-7. Our program, thus, has to make progress from 1 to 7, or from 7 to 1. Given this, our base case (refer to the comment above) is when number is 0 when we go from 7 to 1. Now, we can just call the method itself and add the parameter up, and call itself again until the parameter is 0. Now we get a sum of 1 to 7. The recursive call is in the return statement and this is known as tail recursion, so that the value gets incremented but still calls the method itself. Yay!</aside></p>
+    <p>Let’s explain a more advanced example to really understand what “base case” means.</p>
+    <pre><code class="language-java">public String expand (String word) {
+      if(word.length() == 1) { // base case: if there is no more space for dashes to be placed
+         return word;
+      }
+      
+      return word.substring(0,1) + "-" + expand(word.substring(1)); // calls itself again, with an additional dash on the remaining String
+      
+   }
+</code></pre>
+    <p>What we want to do here pretty simple, too. We are given a String and have to insert dashes (”-”) between the letters of the String. We can easily accomplish this through recursion because we are looping through the String, and similar to how we “looped” from 7 to 1 in the previous problem, we can try a similar approach here were we add a String with a dash and remove the first letter until there’s nothing n the String left - that’s the base case. Take a look at the comments for specific implementation details.</p>
+    <p>Now, to end off, we’re going to look at a mind boggling CCC J5 problem that I made using recursion. This is not in the ICS4U0 curriculum, but I learned this for fun, and since it uses recursion, I will try my best to explain it through the comments. This is considered to be “enrichment.”</p>
+    <pre><code class="language-java">public void dfs(int r, int c) {
+    if (r &gt;= intN || r &lt; 0 || c &gt;= intM || c &lt; 0 || g[r][c] == '*' || vis[r][c] == true) { // base case: the grid is a star or we go out of bounds or we went there already
+        return;
+    } else {
+        if (g[r][c] == 'S') { // adds points while travelling the grid at specific locations
+            total++;
+        } else if (g[r][c] == 'M') {
+            total += 5;
+        } else if (g[r][c] == 'L') {
+            total += 10;
+        }
+        vis[r][c] = true; // we make progress towards the base case here becauase eventually the entire grid will be visited
+
+        dfs(r + 1, c); // recursively loop up, down, left, and right on the 2D array
+        dfs(r - 1, c);
+        dfs(r, c-1);
+        dfs(r, c+1);
+    }
+}
+</code></pre>
+    <p>Why did we use recursion here? We were given a 2D array with certain points being not travellable, so recursion easily allows us to find those points and travel the grid, adding up the points.</p>
+    <p>Another example of enrichment recursion involves using normal DFS to traverse a graph. Here is a general piece of code I used to traverse a graph using DFS. DFS uses recursion, which this topic covers, and is a nice enrichment segue.</p>
+    <pre><code class="language-java">public void dfs(int u) {
+    vis[u] = true;
+    for(int v : adj[u]) 
+        if (!vis[v]) dfs(v);
+}
+</code></pre>
+    <p>Here, vis is an array storing whether or not each node in a graph has been visited. We don’t want it to be visited several times, so that’s why we have it. adj is an adjacency list, storing the graph. Basically, the adjacency list is like a 2D array, storing the edges of a graph, where the rows and columns indicate nodes. For example, adj[2][1] would mean an edge going between node 2 and 1.</p>
+    <p>We recursively call (or loop forwards through) the adjacency list, visiting all nodes connected through edges of the current node. Then we recursively search other nodes that connect to the next node. Hence, <i>depth</i> first search, cause it’s recursive!</p>
+    <h1>Applications of Recursion</h1>
+    <ol>
+        <li>When we want to “loop” through something and there is a easy distinct pattern for looping</li>
+        <li>Traversing advanced data structures like graphs and trees</li>
+        <li>Many mathematical problems with algorithms or repeating patterns (ex: generating fractals, Towers of Hanoi, etc.)</li>
+    </ol>
+    <h1>Common Mistakes</h1>
+    <ol>
+        <li>Stack overflow error<ol>
+                <li>THE most common mistake</li>
+                <li>No base case OR does not make progress towards base case.</li>
+                <li>To debug: Check your conditions. Use pen and paper to trace your recursive calls. Use an example. Try edge cases.</li>
+            </ol>
+        </li>
+    </ol>
+  </section>
+
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Object Oriented Programming</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>My Portfolio</h1>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="what_is_oop.html">What is OOP?</a></li>
+        <li><a href="inheritance.html">Inheritance</a></li>
+        <li><a href="arrays.html">Arrays</a></li>
+        <li><a href="arraylist.html">ArrayList</a></li>
+        <li><a href="arraystwo.html">2D Arrays</a></li>
+        <li><a href="searchandsort.html">Search and Sort</a></li>
+        <li><a href="recursion.html">Recursion</a></li>
+        <li><a href="polymorphism.html">Polymorphism</a></li>
+        <li><a href="bibliography.html">Bibliography</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="oop">
+    <h2>What is Object Oriented Programming?</h2>
+    <p>Java is an Object Oriented Programming language. Now, that’s a mouthful to say and a whole lot of typing, so from now on, we’ll refer to it as “OOP.”</p>
+    <p>There are three features of OOP:</p>
+    <ul>
+        <li>Encapsulation</li>
+        <li>Inheritance + Abstraction</li>
+        <li>Polymorphism</li>
+    </ul>
+    <p>In Unit 1, we’ll cover encapsulation. We’ll save the rest for future units.</p>
+    <p>The opposite of OOP is known as functional programming, where everything is done in one class. No objects are required.</p>
+  </section>
+
+  <section id="objects">
+    <h2>Objects</h2>
+    <p>OOP is meant to recreate real life objects. Objects have methods and attributes. Some methods of a football object could be throwing the football, catching the football, and fixing the football. Some attributes of the football methods could be color, shape, weight, and price. When we change the attributes, we perform actions on the object. Obviously, the object has to exist in the first place, so we instantiate an object.</p>
+    <p>A class in Java is a blueprint for an object. We use classes to create objects in Java. For example, if we had a Football class, we could do:</p>
+    <pre><code class="language-java">Football myBall = new FootBall();
+    </code></pre>
+    <p>We are making a new Football object called myBall.</p>
+  </section>
+
+  <section id="constructor">
+    <h2>Constructor</h2>
+    <p>What if the football we made had a color when we bought it (it wasn’t default)? What if it was shockingly expensive? That’s when we have to use constructors.</p>
+    <p>Normally, we could just instantiate an object without a constructor, but in case we want to give it custom attributes to start off with, we need a custom constructor to give the object these attributes.</p>
+    <p>Here is the code for a possible Football object constructor.</p>
+    <pre><code class="language-java">public Football (double p) {
+    price = p;
+    }
+    //// MAKING A FOOTBALL OBJECT WITH CUSTOM PRICE
+
+    Football myExpensiveBall = new Football(1000.50);
+    Football myNormalBall = new Football();
+    </code></pre>
+    <p>The constructor is a special type of method called when the object is made. It has to be called the same as the class name (i.e., Football). It can take in custom parameters and is overloaded when it does.</p>
+    <p>Static attributes and methods are not shared by a class’s objects. They are NOT a part of OOP. Thus, a static method can call only other static methods and can only access static variables.</p>
+  </section>
+
+  <section id="encapsulation">
+    <h2>Encapsulation</h2>
+    <p>When we’re coding, we want our data and information to be as safe as possible. That’s why we have encapsulation! If we wanted information in the form of attributes to only be accessible in one class and in no other classes, we would declare that attribute(s) as private. On the other hand, if we didn’t care if other classes could access this information, we would make it public, thus making the attributes editable and viewable. Normally, all instance variables (attributes) are private for security reasons unless there exists a very good reason for it to be public.</p>
+    <p>Now, here’s a complete class with all information that we discussed, summarized.</p>
+    <p>The class that I will show here is a class that I commented myself as a project. It has methods and attributes. We use OOP here to show that the class can be made as an object which represents a car in real life.</p>
+    <pre><code class="language-java">public class Car {
+   private String brand;
+   private String model;
+   private int kilometres;
+   private double gas;
+   private double tankCapacity;
+   // This method is the constructor, which is called whenever an instance of the class is made.
+   // A car is defined by its brand, its model, its gas measure, and its tank capacity when first initialized.
+   public Car(String b, String m, double g, double tCap){
+      brand = b;
+      model = m;
+      kilometres = 0;
+      gas = g;
+      tankCapacity = tCap;
+   }
+   // This method models the car to drive a distance given as a double.
+   // When the car drives several of its attributes change, like the total kilometers as well as the gas level which decreases by the distance divided by 5.
+   public void drive(double distance){
+      kilometres += distance;
+      gas -= distance / 5;
+   }
+   // This method models a car getting refueled by increasing its gas parameter to the max (the attribute tankCapacity is the max).
+   public void gasUp(){
+      gas = tankCapacity;
+   }
+} // Car class
+    </code></pre>
+    <p>This example shows the various methods, like gasUp as well as how they interact with the attributes, making it a prime example of Object Oriented Programming.</p>
+  </section>
+
+  <section id="applications">
+    <h2>Applications of OOP</h2>
+    <ol>
+        <li>Safety because we encapsulate data
+            <ol>
+                <li>Bank accounts, student objects which include name and marks, etc.</li>
+            </ol>
+        </li>
+        <li>Classes describe real life objects
+            <ol>
+                <li>Can “simulate” real-life objects, like a Car object</li>
+                <li>Can also simulate parts of an object, like a Car Window or an App Login page</li>
+                <li>Parts and objects can interact with one another. For example, a login screen can interact with an app to change the attribute “isLoggedIn” to true.</li>
+            </ol>
+        </li>
+    </ol>
+  </section>
+
+  <section id="mistakes">
+    <h2>Common Mistakes</h2>
+    <ol>
+        <li>Accessing private attributes directly. An error will result.
+            <ol>
+                <li>Use an accessor method! Or if you want to modify something, use a mutator method!</li>
+            </ol>
+        </li>
+        <li>Making private attributes public.
+            <ol>
+                <li>It's a security danger! Other classes can change attributes of another class directly!</li>
+            </ol>
+        </li>
+    
+    </ol>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArrayList vs. Arrays</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>My Portfolio</h1>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="what_is_oop.html">What is OOP?</a></li>
+        <li><a href="inheritance.html">Inheritance</a></li>
+        <li><a href="arrays.html">Arrays</a></li>
+        <li><a href="arraylist.html">ArrayList</a></li>
+        <li><a href="arraystwo.html">2D Arrays</a></li>
+        <li><a href="searchandsort.html">Search and Sort</a></li>
+        <li><a href="recursion.html">Recursion</a></li>
+        <li><a href="polymorphism.html">Polymorphism</a></li>
+        <li><a href="bibliography.html">Bibliography</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="introduction">
+    <p>Let’s say that we wanted to store the names and final marks of twenty students in a class. We could use an array. But what if, halfway through the semester, some students came into the class, some students left the class, some marks changed, the principal made a new rule where the marks had to be shuffled, etc.? All of that would be pretty challenging to implement with an array.</p>
+    <p>Instead, there is another data structure made for the purpose of easy manipulation: ArrayList. ArrayLists are dynamic, where you can add, swap, delete, and insert elements in the same ArrayList. Even better, ArrayLists don’t all have to include the same data type, unlike arrays. They can even include nested ArrayLists!</p>
+  </section>
+
+  <section id="differences">
+    <h1>Differences Between Arrays and ArrayLists</h1>
+    <figure class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Arrays</th>
+            <th>ArrayLists</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Length cannot be changed</td>
+            <td>Length can be changed</td>
+          </tr>
+          <tr>
+            <td>Can only hold one data type at a time</td>
+            <td>Can hold elements of several data types (String, int, etc.)</td>
+          </tr>
+          <tr>
+            <td>Uses [] to access elements</td>
+            <td>Uses .get(index) to access elements</td>
+          </tr>
+          <tr>
+            <td>Can only hold primitive and object elements</td>
+            <td>Can only hold object elements. Autoboxes primitive elements to convert them to object elements (for example, from int to Integer).</td>
+          </tr>
+        </tbody>
+      </table>
+    </figure>
+  </section>
+
+  <section id="methods">
+    <h1>ArrayList Methods</h1>
+    <p>As mentioned previously, ArrayLists have so many more capabilities than arrays do, including inserting elements between other elements. Here is a short list of some methods that we can perform on ArrayLists.</p>
+    <figure class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Parameter</th>
+            <th>Return</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>add()</td>
+            <td>Object</td>
+            <td>boolean</td>
+            <td>Adds an element to the ArrayList</td>
+          </tr>
+          <tr>
+            <td>get()</td>
+            <td>int index</td>
+            <td>Object</td>
+            <td>Returns the element at the specified position</td>
+          </tr>
+          <tr>
+            <td>remove()</td>
+            <td>int index</td>
+            <td>Object</td>
+            <td>Removes the element at the specified position</td>
+          </tr>
+          <tr>
+            <td>size()</td>
+            <td>None</td>
+            <td>int</td>
+            <td>Returns the number of elements in the ArrayList</td>
+          </tr>
+          <tr>
+            <td>clear()</td>
+            <td>None</td>
+            <td>void</td>
+            <td>Removes all elements from the ArrayList</td>
+          </tr>
+          <tr>
+            <td>Collections.shuffle()</td>
+            <td>ArrayList</td>
+            <td>void</td>
+            <td>Shuffles the given ArrayList in random order.</td>
+          </tr>
+        </tbody>
+      </table>
+    </figure>
+  </section>
+
+  <section id="demonstrations">
+    <h1>Array Demonstrations</h1>
+    <p>I could use my understanding of ArrayLists, how they work, and ArrayList methods in this assignment called a round of bridge.</p>
+    <p>Basically, the program I wrote simulates a round of bridge (the game), randomly deals cards out, and adds up the points of the player and finally display the winner. We decided to use ArrayLists because we had to 1) shuffle the elements and 2) add and remove elements easily. Arrays are not capable of performing these functions easily at the same time so we decided to use ArrayLists.</p>
+    <pre><code class="language-java">	// Given the String in storage this method adds it to the arraylist and shuffle it to create random cards
+   public void shuffle ()
+   {
+      deck = new ArrayList &lt; String &gt; (); // initialize the ArrayList to contain Strings
+      for (int i = 0 ; i &lt; totalCards.length () ; i += 3)
+      {
+         String str = totalCards.substring (i, i + 2);
+         deck.add (str); // loops through deck and adds to ArrayList
+      }
+      Collections.shuffle (deck); // randomly shufles ArrayList
+   }
+</code></pre>
+    <p>What we did here is we shuffled the cards. Based on the cards String which the user inputted, we then added those Strings to the ArrayList using the add() method. Then, we shuffled the ArrayList using Collections.shuffle().</p>
+    <p>Here, we decided to store Strings inside the ArrayLists, but they could store anything else that is an Object, and even different data types! Needless to say, ArrayLists are so much more cooler than Arrays!</p>
+    <h2>Autoboxing</h2>
+    <figure class="table">
+      <table>
+        <tbody>
+          <tr>
+            <td>💡 Autoboxing occurs in ArrayLists when Java automatically “wraps” or “boxes” a primitive data type in a wrapper class object. For example, if you try to add an int value to an ArrayList, it will automatically be converted to an Integer object which is stored. As such, you can declare an ArrayList like this: ArrayList&lt;Integer&gt; arraylist = new ArrayList&lt;Integer&gt;();</td>
+          </tr>
+        </tbody>
+      </table>
+    </figure>
+    <p>Continuing with our bridge example, this snippet will demonstrate how to loop through an ArrayList.</p>
+    <pre><code class="language-java">int track = 0;
+  while (!deck.isEmpty ())
+    {
+      
+      String card = deck.get (0);
+      
+      if (track &lt; 13)
+      {
+         player1 += card;
+         player1 += " ";
+         deck.remove (card);
+      }
+      else if (track &lt; 26)
+      {
+         player2 += card;
+         player2 += " ";
+         deck.remove (card);
+      }
+      else if (track &lt; 39)
+      {
+         player3 += card;
+         player3 += " ";
+         deck.remove (card);
+      }
+      else if (track &lt; 52)
+      {
+         player4 += card;
+         player4 += " ";
+         deck.remove (card);
+      }
+      track++;
+   }
+</code></pre>
+    <p>Here, we cannot just have a for loop like we would with arrays. Why? Since ArrayLists are dynamic, when we add and remove elements, the current index can change, which can be done with a while loop. For example, if we remove an element from an ArrayList, the next element remains at the current index. As you can see here, we remove elements from an ArrayList until it’s empty, and use a variable called track as our “index.”</p>
+  </section>
+
+  <section id="mistakes">
+    <h1>Common Mistakes</h1>
+    <ol>
+      <li>Mixing Array and ArrayList syntax up<ol>
+        <li>Result: Compilation errors. Check the ArrayList methods table to refer to which methods are exclusively for ArrayLists.</li>
+      </ol>
+      </li>
+      <li>Initializing an ArrayList with a primitive data type<ol>
+        <li>Result: Compilation errors. Refer to the autoboxing section above.</li>
+      </ol>
+      </li>
+      <li>Looping through an ArrayList with for loop and adding/removing elements<ol>
+        <li>Result: Not all elements are accessed correctly. Use a while loop instead. Refer to the above tutorial and second code snippet.</li>
+      </ol>
+      </li>
+    </ol>
+  </section>
+
+  <section id="applications">
+    <h1>ArrayList Applications</h1>
+    <ol>
+      <li>All Array applications</li>
+      <li>If you want to add, set, or remove elements, use ArrayList (efficient operations using dynamic array)</li>
+    </ol>
+  </section>
+</body>
+</html>

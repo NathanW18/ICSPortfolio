@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    #homepage {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(200px, 1fr));
+      gap: 10px; 
+    }
+
+    .box {
+      text-align: center;
+      padding: 20px; 
+      background-color: #333; 
+      border-radius: 10px; 
+    }
+
+    .box img {
+      width: 80px;
+      height: 80px; 
+    }
+
+    .box p {
+      font-size: 1.2rem; 
+      margin-top: 10px;
+      color: white; 
+    }
+
+    .box a {
+      text-decoration: none; 
+      color: white; 
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My Portfolio</h1>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="what_is_oop.html">What is OOP?</a></li>
+        <li><a href="inheritance.html">Inheritance</a></li>
+        <li><a href="arrays.html">Arrays</a></li>
+        <li><a href="arraylist.html">ArrayList</a></li>
+        <li><a href="arraystwo.html">2D Arrays</a></li>
+        <li><a href="searchandsort.html">Search and Sort</a></li>
+        <li><a href="recursion.html">Recursion</a></li>
+        <li><a href="polymorphism.html">Polymorphism</a></li>
+        <li><a href="bibliography.html">Bibliography</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="homepage">
+    <div class="box">
+      <a href="about.html"><img src="./images/aboutme.png" alt="About Me"></a>
+      <a href="about.html"><p>About Me</p></a>
+    </div>
+    <div class="box">
+      <a href="what_is_oop.html"><img src="./images/cookie.png" alt="What is OOP?"></a>
+      <a href="what_is_oop.html"><p>What is OOP?</p></a>
+    </div>
+    <div class="box">
+      <a href="inheritance.html"><img src="./images/inheritance.png" alt="Inheritance"></a>
+      <a href="inheritance.html"><p>Inheritance</p></a>
+    </div>
+    <div class="box">
+      <a href="arrays.html"><img src="./images/array.png" alt="Arrays"></a>
+      <a href="arrays.html"><p>Arrays</p></a>
+    </div>
+    <div class="box">
+      <a href="arraylist.html"><img src="./images/arraylist.png" alt="ArrayList"></a>
+      <a href="arraylist.html"><p>ArrayList</p></a>
+    </div>
+    <div class="box">
+      <a href="arraystwo.html"><img src="./images/grid.png" alt="2D Arrays"></a>
+      <a href="arraystwo.html"><p>2D Arrays</p></a>
+    </div>
+    <div class="box">
+      <a href="searchandsort.html"><img src="./images/search.png" alt="Search and Sort"></a>
+      <a href="searchandsort.html"><p>Search and Sort</p></a>
+    </div>
+    <div class="box">
+      <a href="recursion.html"><img src="./images/recurse.jpeg" alt="Recursion"></a>
+      <a href="recursion.html"><p>Recursion</p></a>
+    </div>
+    <div class="box">
+      <a href="polymorphism.html"><img src="./images/polymor.png" alt="Polymorphism"></a>
+      <a href="polymorphism.html"><p>Polymorphism</p></a>
+    </div>
+    <div class="box">
+      <a href="bibliography.html"><img src="./images/biblio.png" alt="Bibliography"></a>
+      <a href="bibliography.html"><p>Bibliography</p></a>
+    </div>
+  </section>
+
+</body>
+</html>

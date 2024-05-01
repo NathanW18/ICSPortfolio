@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is Inheritance?</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>My Portfolio</h1>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="what_is_oop.html">What is OOP?</a></li>
+        <li><a href="inheritance.html">Inheritance</a></li>
+        <li><a href="arrays.html">Arrays</a></li>
+        <li><a href="arraylist.html">ArrayList</a></li>
+        <li><a href="arraystwo.html">2D Arrays</a></li>
+        <li><a href="searchandsort.html">Search and Sort</a></li>
+        <li><a href="recursion.html">Recursion</a></li>
+        <li><a href="polymorphism.html">Polymorphism</a></li>
+        <li><a href="bibliography.html">Bibliography</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="oop">
+    <h2>What is Inheritance?</h2>
+    <p>Java is meant to be object oriented. Sometimes, you might want to create a class from another class. What does that mean? Well, for example, let’s say you made a class called Book. In book, you have methods for opening a book, reading a book, and changing the book’s cover. You also have instance variables, such as the book’s length as well as the color.</p>
+    <p>Let’s say you wanted to make another class for a textbook. A textbook is a type of book, so we also have the same methods and instance variables as the book does. We could rewrite all the methods that are in Book into Textbook, but that would be inefficient and a waste of methods.</p>
+    <p>Instead, we would make the Textbook inherit the Book class. When a class inherits another class, we call the class that inherits another class the subclass or child class, and the class that provides the inheritance the superclass or parent class.</p>
+    <p>When one class inherits another:</p>
+    <ul>
+        <li>Its methods are inherited.</li>
+        <li>Its instance variables are inherited.</li>
+    </ul>
+  </section>
+
+  <section id="inheritance">
+    <h2>How to Inherit?</h2>
+    <p>Here, we used inheritance in an assignment where we had to use Java to model a unique invention. Our unique invention idea was basically to create a swimsuit for people which creates a custom temperature that they can select while swimming.</p>
+    <pre><code class="language-java">// Names: Nathan Wang &amp; Allen Yang
+// Date: February 16, 2024
+// Teacher: Ms. Krasteva
+// Program Description: This is the class for TempSwimmer, modelling the actions of a swimsuit which can change the temperature of the water only for the person wearing it.
+
+import java.util.*; // needed for Math.random()
+import java.awt.*;
+
+public class TempSwimmer // EXTENDS KEYWORD ALLOWS US TO EXTEND A CLASS
+{
+    String swimSuitSize, material, power;
+    double price, tempCelsius;
+    int battery, minTemp, maxTemp;
+    boolean isInUse;
+
+    // First generic constructor without parameters
+
+    public TempSwimmer ()
+    {
+	swimSuitSize = "M";
+	material = "Fabric";
+	power = "ON";
+	price = 1000.0;
+	tempCelsius = 25.5;
+	battery = 100;
+	minTemp = 15;
+	maxTemp = 40;
+	isInUse = false;
+    }
+
+    // Second constructor with user-defined attributes to make object
+
+    public TempSwimmer (String swimSuitSize, String material, String power, double price, int battery, double tempCelsius, int minTemp, int maxTemp, boolean isInUse)
+    {
+	this.swimSuitSize = swimSuitSize;
+	this.material = material;
+	this.power = power;
+	this.price = price;
+	this.battery = battery;
+	this.tempCelsius = tempCelsius;
+	this.minTemp = minTemp;
+	this.maxTemp = maxTemp;
+	this.isInUse = isInUse;
+    }
+
+    // Lowers the temperature of the suit by temperature t
+
+    public void lowerTemperature (double t)
+    {
+	if (tempCelsius - t &gt;= minTemp &amp;&amp; battery - (int) (t / 3) &gt;= 0 &amp;&amp; isInUse &amp;&amp; power.equals ("ON"))
+	{ // checks if it is in use, if it does not go above the highest possible temperature, and that the battery is not zero
+	    tempCelsius -= t;
+	    battery -= (int) (t / 3);
+	}
+    }
+
+    public void raiseTemperature (double t)
+    {
+	if (tempCelsius + t &lt;= maxTemp &amp;&amp; battery - (int) (t / 2) &gt;= 0 &amp;&amp; isInUse &amp;&amp; power.equals ("ON"))
+	{
+	    tempCelsius += t;
+	    battery -= (int) (t / 2);
+	}
+    }
+
+    // Recharges the suit
+    public void recharge ()
+    {
+	if (power.equals ("OFF"))
+	{
+	    battery = 100;
+	}
+    }
+
+    // Sets the tempearture to a random temperature between a given interval as parameters
+    public void randomTemp (int low, int high)
+    {
+	if (low &lt; minTemp)
+	{
+	    low = minTemp;
+	}
+	if (high &gt; maxTemp)
+	{
+	    high = maxTemp;
+	}
+
+	double randomT = low + (Math.random () * (high - low));
+	if (isInUse &amp;&amp; power.equals ("ON") &amp;&amp; battery - (int) ((high - low) / 2) &gt;= 0)
+	{
+	    tempCelsius = randomT;
+	    battery -= (int) ((high - low) / 2);
+	}
+
+    }
+
+    // Turns device on and off
+    public void powerSwitch ()
+    {
+	power = power.equals ("ON") ? "OFF":
+	"ON";
+    }
+
+    // Locks the temperature customization abilities
+    public void lock ()
+    {
+	if (power.equals ("ON"))
+	{
+	    isInUse = false;
+	}
+    }
+
+    // Unlocks the temperature customizatino abilities
+    public void unlock ()
+    {
+	if (power.equals ("ON"))
+	{
+	    isInUse = true;
+	}
+    }
+    
+    // Obtains battery remaning
+    public int getBattery ()
+    {
+	return battery;
+    }
+
+    // Obtains price
+    public double getPrice ()
+    {
+	return price;
+    }
+
+    // Obtains size
+    public String getSize ()
+    {
+	return swimSuitSize;
+    }
+
+    // Obtains temperature in celsius
+    public double getTemperature ()
+    {
+	return tempCelsius;
+    }
+
+    // Obtains nicely-formatted output
+    public String toString ()
+    {
+	return "Power: " + power + "\\nBattery (%): " + battery + "\\nSize: " + swimSuitSize + "\\nMaterial: " + material + "\\nPrice ($): " + price + "\\nTemperature (C): " + tempCelsius + "\\nminTemp: " + minTemp + "\\nmaxTemp: " + maxTemp + "\\nisInUse: " + isInUse + "\\n";
+    }
+}
+
+</code></pre>
+    <p>Next, we wanted to make a subclass of the Swimsuit class for children. This was basically the same thing as the subclass (it serves the same basic purpose), but with some additional functionalities, such as safety switches and alarms.</p>
+    <p>As such, we extend the subclass using the “extends” keyword.</p>
+    <pre><code class="language-java">// Names: Nathan Wang &amp; Allen Yang
+// Date: February 16, 2024
+// Teacher: Ms. Krasteva
+// Program Description: This is the class for ChildrenSuit, a child class for TempSwimmer which models the actions of a children's swimming suit with protective features.
+
+import java.awt.*;
+public class ChildrenSuit extends TempSwimmer // EXTENDS KEYWORD ALLOWS US TO EXTEND A CLASS
+{
+    private boolean floats, alarm, isZipped;
+    private Color colour;
+    private int zipperLength;
+
+    // First generic constructor without parameters
+    public ChildrenSuit ()
+    {
+	super ();
+	floats = false;
+	alarm = false;
+	colour = Color.black;
+	isZipped = false;
+	zipperLength = 15;
+    }
+
+    // Second constructor with user-defined attributes to make object
+
+    public ChildrenSuit (String swimSuitSize, String material, String power, double price, int battery, double tempCelsius, int minTemp, int maxTemp, boolean isInUse, boolean floats, boolean alarm, boolean isZipped, Color colour, int zipperLength)
+    {
+	super (swimSuitSize, material, power, price, battery, tempCelsius, minTemp, maxTemp, isInUse);
+	this.floats = floats;
+	this.alarm = alarm;
+	this.colour = colour;
+	this.isZipped = isZipped;
+	this.zipperLength = zipperLength;
+    }
+
+    // Changes the color for the children's suit because children often have different color preferences
+
+    public void changeColour (Color newColor)
+    {
+	if (power.equals ("ON") &amp;&amp; battery - 30 &gt;= 30)
+	{
+	    colour = newColor;
+	    battery -= 30;
+	}
+    }
+
+    // Zips the suit up (children need help taking suits on and off)
+
+    public void zip ()
+    {
+	isZipped = true;
+    }
+
+    // Unzips the suit for easy removal (children need help taking suits on and off)
+
+    public void unzip ()
+    {
+	isZipped = false;
+    }
+
+    // Makes the suit rise up through inflatable components (in an emergency) like safety wheels on a bike
+
+    public void rise ()
+    {
+	floats = true;
+    }
+
+    // Sounds the alarm in an emergency
+
+    public void soundAlarm ()
+    {
+	if (power.equals ("ON") &amp;&amp; battery - 15 &gt;= 0)
+	{
+	    alarm = true;
+	    battery -= 15;
+	}
+    }
+    // Deactivates the alarm
+
+    public void deactivateAlarm ()
+    {
+	alarm = false;
+    }
+
+    // Returns the zipper length of the suit
+    public int getZipperLength ()
+    {
+	return zipperLength;
+    }
+
+    // Returns whether the alarm is on or off
+    public boolean isAlarm ()
+    {
+	return alarm;
+    }
+
+    // Changes the size of the suit, depending on the size that the user chooses
+    // The atrributes for the suit also change depending on the size (ex: zipper length)
+
+    public void morph (String newSize)
+    {
+	if (power.equals ("ON"))
+	{
+	    if (newSize.equals ("S"))
+	    {
+		swimSuitSize = "S";
+		zipperLength = 10;
+		price = 500.0;
+	    }
+	    else if (newSize.equals ("M"))
+	    {
+		swimSuitSize = "M";
+		zipperLength = 15;
+		price = 1000.0;
+
+	    }
+	    else if (newSize.equals ("L"))
+	    {
+		swimSuitSize = "L";
+		zipperLength = 17;
+		price = 1500.0;
+	    }
+	    else if (newSize.equals ("XL"))
+	    {
+		swimSuitSize = "XL";
+		zipperLength = 20;
+		price = 2000.0;
+
+	    }
+	    else
+	    {
+		throw new IllegalArgumentException ("Invalid size, must be S, M, L, or XL.");
+	    }
+	}
+    }
+
+    // Outputs nicely-formatted text
+    public String toString ()
+    {
+	return "Power: " + power + "\\nBattery (%): " + battery + "\\nSize: " + swimSuitSize + "\\nMaterial: " + material + "\\nPrice ($): " + price + "\\nTemperature (C): " + tempCelsius + "\\nminTemp: " + minTemp + "\\nmaxTemp: " + maxTemp + "\\nisInUse: " + isInUse + "\\nFloats: " + floats + "\\nAlarm: " + alarm + "\\nColor: " + colour + "\\nisZipped: " + isZipped + "\\nZipper Length: " + zipperLength;
+    }
+}
+</code></pre>
+  </section>
+
+  <section id="purpose">
+    <h2>Purpose of Inheritance</h2>
+    <p>Notice how the subclass is basically the same thing as the superclass but with some additional functionalities. So, we don’t have to rewrite every single method and variable all over again, but simply extend the class. Now, we say that the ChildSuit class “is a” Swimsuit, because the ChildSuit class extends the superclass. The example here is a prime example of how we can illustrate relationships between classes using inheritance -- in fact, certain methods and attributes are the same, and we just wanted to add some additional, unique features, like an alarm. Without using inheritance, oru code would be a lot more inefficient.Inheritance allows us to reuse code and implement relationships between classes, thus being crucial to Object Oriented Programming.</p>
+    <figure class="image" data-ckbox-resource-id="76YlDFzD-A0B">
+      <picture>
+        <source srcset="https://ckbox.cloud/fb9373d71696a7807048/assets/76YlDFzD-A0B/images/80.webp 80w,https://ckbox.cloud/fb9373d71696a7807048/assets/76YlDFzD-A0B/images/160.webp 160w,https://ckbox.cloud/fb9373d71696a7807048/assets/76YlDFzD-A0B/images/190.webp 190w" sizes="(max-width: 190px) 100vw, 190px" type="image/webp"><img src="https://ckbox.cloud/fb9373d71696a7807048/assets/76YlDFzD-A0B/images/190.png" width="190" height="176">
+      </picture>
+      <figcaption>Source of image: https://chortle.ccsu.edu/java5/Notes/chap50/ch50_5.html. Demonstrates OOP “is a” relationship.</figcaption>
+    </figure>
+  </section>
+
+  <section id="mistakes">
+    <h2>Common Mistakes</h2>
+    <p>Some common mistakes for inheritance include using inheritance just for the sake of using inheritance, not fully understanding the relationship between the superclass and subclass. This results in few methods or attributes that are useful being reused and a lot of messy code. Remember, inheritance is not always the solution to reusing code!!! Read the tutorial above to understand when to use inheritance properly and most efficiently and effectively.</p>
+
+  </section>
+
+</body>
+</html>

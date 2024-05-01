@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introduction to Arrays</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>My Portfolio</h1>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="what_is_oop.html">What is OOP?</a></li>
+        <li><a href="inheritance.html">Inheritance</a></li>
+        <li><a href="arrays.html">Arrays</a></li>
+        <li><a href="arraylist.html">ArrayList</a></li>
+        <li><a href="arraystwo.html">2D Arrays</a></li>
+        <li><a href="searchandsort.html">Search and Sort</a></li>
+        <li><a href="recursion.html">Recursion</a></li>
+        <li><a href="polymorphism.html">Polymorphism</a></li>
+        <li><a href="bibliography.html">Bibliography</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="introduction">
+    <p>Let’s say we wanted to store the final marks of a class of twenty students. We could make twenty int variables, each corresponding to one student’s marks. But that would be very inefficient to create and very challenging to compare and update. Instead, we use arrays.</p>
+    <figure class="table">
+      <table>
+        <tbody>
+          <tr>
+            <td>💡 Arrays are a fundamental data structure that can store multiple values of the same type in a single variable. They are used to organize data in a way that allows for efficient access and modification.</td>
+          </tr>
+        </tbody>
+      </table>
+    </figure>
+    <p>Since arrays are a “collection” the same variable, they are declared with the variable data type.</p>
+    <pre><code class="language-java">int[] marks = new int[20]; // creates integer array with 20 elements
+String[] names = new String[20]; // creates String array with 20 elements
+</code></pre>
+    <p>If we wanted to initialize an array, either after or directly with declaration, we would do this.</p>
+    <pre><code class="language-java">int[] marks = new int[7];
+marks = {100, 90, 56, 93, 92, 95, 87};
+// or //
+int[] marks = {100, 90, 56, 93, 92, 95, 87};
+</code></pre>
+    <p>If we wanted to access an element of an array, we first need to find the index of the element. In Java arrays, the index always starts at 0. This means the first element of the array has index 0, the second element has index 1, the third element has index 2, and so on.</p>
+    <p>Interestingly, the arrays an the first code snippet above with marks and names are parallel arrays. This means that for each index of the two parallel arrays, they refer to the same body (one student). For example, the first index of marks refers to the mark of the first student, while the first index of the second array refers to the name of the first student.</p>
+    <p>We can find the index of the element, either by manually counting, or through looping (iterating) through the array using a for loop.</p>
+  </section>
+
+  <section id="iteration">
+    <h1>Iteration</h1>
+    <h2>Ratings Assignment</h2>
+    <p>Consider one of my projects in the class, the ratings assignment, where we had to store information about different people into parallel arrays and assign everyone a rating. Then, we stated who had the highest rating and won the “game.” This would be much easier to do with arrays, because then we would keep track of everyone’s information using one index and compare each other’s information using one index, too (parallel arrays).,</p>
+    <pre><code class="language-java">// Further implementation not shown
+String[] name = {"Nathan Wang", "Allen Yang", "Yanni Kos", "Arya Stephanos",
+   "Achilleas Rokou", "Iustus Xiana", "Susan Goaway", "Menander Narcyz"};
+int[] wpm = {150, 100, 110, 88, 200, 68, 95, 305};
+for (int i = 0 ; i &lt; 8 ; i++)
+      { // Loops through the attributes of every person
+         if (codingYears [i] &gt; 50) // to access an element we use arrayName and [index]]
+         { // Adds rating based on coding years
+            ratings [i] += 3;
+         }
+         else if (codingYears [i] &gt; 25)
+         {
+            ratings [i] += 2;
+         }
+         else
+         {
+            ratings [i]++;
+         }
+}
+</code></pre>
+    <p>The first two lines of the code snippet above are parallel arrays, which store the name and words per minute typing speed for different people according to index. Then, we loop through the array to add rating for each person. We then access the coding years or words per minute array like arrayName[i], where arrayName is the array’s name and i is the index, given by the current iteration in the for loop. For example, codingYears [i] for i=3 would give the fourth person’s coding years.</p>
+    <p>Arrays helped significantly in the ratings project because it provided an easy and efficient way to store data of the same data type for everyone through the use of parallel arrays. Otherwise, we would have had to make a variable for everyone which would be both time consuming an a nightmare to update and retrieve data from.</p>
+  </section>
+
+  <section id="methods">
+    <h1>Methods</h1>
+    <p>The array data type has methods, several are very important. They are listed out in the table.</p>
+    <figure class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Purpose</th>
+            <th>Past Usages and Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>.length</td>
+            <td>Returns the length of the array</td>
+            <td>This is not technically a “method,” but we treat it as one because we expect a value to be returned (i.e., the length of the array). I have used this in the ratings assignment when we wanted to loop through an array.</td>
+          </tr>
+          <tr>
+            <td>Arrays.sort(arrayName);</td>
+            <td>Sorts the array.</td>
+            <td>No usages in this unit, but good to know.</td>
+          </tr>
+        </tbody>
+      </table>
+    </figure>
+  </section>
+
+  <section id="mistakes">
+    <h1>Common Mistakes</h1>
+    <ol>
+      <li>Forgetting array indices begin at 0
+        <ol>
+          <li>Result: All of your indices will be one off, resulting in an ArrayIndexOutOfBounds exception when you attempt to retrieve the last element of the array</li>
+        </ol>
+      </li>
+      <li>Using .length as a method (.length())
+        <ol>
+          <li>Result: There is no such method called .length(), length is an attribute, not a method</li>
+        </ol>
+      </li>
+      <li>For 2D arrays: swapping the row and column indices
+        <ol>
+          <li>Result: You either get the wrong value OR get an ArrayIndexOutOfBounds exception</li>
+        </ol>
+      </li>
+    </ol>
+  </section>
+
+  <section id="applications">
+    <h1>Array Applications</h1>
+    <ol>
+      <li>If you want to store a list of all the same elements, or keep several lists of attributes that pertain to the same object (i.e., parallel arrays)</li>
+      <li>Storing large amounts of data and retrieving them through loops</li>
+      <li>Sorting, changing, and accessing a particular piece of data</li>
+    </ol>
+  </section>
+
+</body>
+</html>
